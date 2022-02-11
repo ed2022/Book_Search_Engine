@@ -33,29 +33,29 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
-  },
-  saveBook: async (parent, args, context) => {
-    if (context.user) {
-      const updatedUser = await User.findOneAndUpdate(
-        { _id: context.user._id },
-        { $addToSet: { savedBooks: args.input } },
-        { new: true, runValidators: true }
-      );
-      return updatedUser;
+    saveBook: async (parent, args, context) => {
+      if (context.user) {
+        const updatedUser = await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $addToSet: { savedBooks: args.input } },
+          { new: true, runValidators: true }
+        );
+        return updatedUser;
+      }
+      throw new AuthenticationError("Not signed in, try again!")
+    },
+    removeBook: async (parent, args, context) => {
+      if (context.user) {
+        const updatedUser = await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $addToSet: { savedBooks: args.body } },
+          { new: true, runValidators: true }
+        );
+        return updatedUser;
+      }
+      throw new AuthenticationError("Couldn't find user with this id!!")
     }
-    throw new AuthenticationError("Not signed in, try again!")
   },
-  removeBook: async (parent, args, context)=> {
-    if (context.user) {
-      const updatedUser = await User.findOneAndUpdate(
-        { _id: context.user._id },
-        { $addToSet: { savedBooks: args.body } },
-        { new: true, runValidators: true }
-      );
-      return updatedUser;
-    }
-    throw new AuthenticationError("Couldn't find user with this id!!")
-  }
 };
 
 module.exports = resolvers;
