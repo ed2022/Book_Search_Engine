@@ -20,7 +20,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "apollo-server-express": "^2.21.0",
+    "apollo-server-express": "^2.15.0",
     "if-env": "^1.0.4"
   },
   "devDependencies": {
