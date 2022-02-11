@@ -3,7 +3,7 @@ import { gql } from 'graphql-tag';  // import { gql } from '@apollo/client'; was
 
 //following Readme doc 
 export const GET_ME = gql`
-  query me {
+  {
     me {
       _id
       username
